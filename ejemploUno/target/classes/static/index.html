@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>
+    Esta es mi primera página WEB!
+</h1>
+<div>
+    <p>Get your greeting <a href="/saludo?name=Jairo Alberto A.">Saludo</a></p>
+</div>
+
+<div>
+    <p>Get your products information <a href="/allproducts">Inventario</a></p>
+</div>
+
+<div>
+    <p>Users information <a href="/users">Usuarios</a></p>
+</div>
+
+<div>
+    <h2>Crear Usuario</h2>
+
+    <form id="userForm">
+        <div>
+            <label>Username:</label>
+            <input type="text" id="username" required>
+        </div>
+
+
+
+        <div>
+            <label>Password:</label>
+            <input type="password" id="password" required>
+        </div>
+
+
+
+        <div>
+            <label>Role:</label>
+            <input type="text" id="role" required>
+        </div>
+
+
+
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        document.getElementById("userForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const user = {
+                name: document.getElementById("username").value,
+                email: document.getElementById("password").value,
+                age: parseInt(document.getElementById("role").value)
+            };
+
+            try {
+                const response = await fetch("http://localhost:8080/users", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(user)
+                });
+
+                const data = await response.json();
+
+                document.getElementById("response").textContent =
+                    JSON.stringify(data, null, 2);
+
+            } catch (error) {
+                document.getElementById("response").textContent =
+                    "Error: " + error.message;
+            }
+        });
+    </script>
+
+</div>
+
+</body>
+</html>
