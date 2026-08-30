@@ -1,2 +1,6 @@
 # variables de entorno
-*se oculto informacion sencible 
+*se oculto información sensible*
+
+
+#para que funciona 
+*para proteger a los usuarios*
